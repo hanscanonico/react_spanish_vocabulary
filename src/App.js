@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
-import TranslationList from './components/TranslationList';
 import Header from './components/Header';
+import Exercice from './components/Exercice';
+import Course from './components/Course';
 
 class App extends React.Component {
 
@@ -10,7 +11,8 @@ class App extends React.Component {
     inputsUser: [],
     inputsState: [],
     categories: [],
-    current_category_id: -1
+    current_category_id: -1,
+    content: "exercice"
   }
 
   componentDidMount() {
@@ -18,12 +20,24 @@ class App extends React.Component {
     this.fetchCategories()
   }
 
-  fetchTranslations() {
-    const current_category_id = this.state.current_category_id
-    let url = 'http://localhost:3000/translations.json'
+  fetchTranslations(contentForce, current_category_id_forced) {
+    const content = contentForce || this.state.content
+    const current_category_id = current_category_id_forced || this.state.current_category_id
+    let url = 'http://localhost:3000/'
+    if (contentForce !== undefined) {
+
+    }
+    if (content == "exercice") {
+      url += 'translations.json'
+    }
+    else if (content == "course") {
+      url += 'revision/index.json'
+    }
+
     if (current_category_id > -1) {
       url += '?category_id=' + current_category_id
     }
+    console.log("url : " + url)
     fetch(url)
       .then(response => response.json())
       .then(data => {
@@ -51,10 +65,13 @@ class App extends React.Component {
       });
   }
 
-  handleCategory = (event, category_id) => {
+  handleCategory = (event, category_id, content) => {
     event.preventDefault()
-    this.setState({ current_category_id: category_id })
-    this.fetchTranslations()
+    this.setState({
+      current_category_id: category_id,
+      content: content
+    })
+    this.fetchTranslations(content, category_id)
   }
 
   fetchCategories() {
@@ -72,11 +89,9 @@ class App extends React.Component {
   }
 
   handleCorrection = () => {
-
     const translations = [...this.state.translations]
     const inputsUser = [...this.state.inputsUser]
     let inputsState = [...this.state.inputsState]
-
     translations.map(function (translation) {
       inputsState[translation.id] = "is-valid"
       if (inputsUser[translation.id].normalize("NFD").replace(/[\u0300-\u036f]/g, "") !== translation.correction.normalize("NFD").replace(/[\u0300-\u036f]/g, "")) {
@@ -98,25 +113,25 @@ class App extends React.Component {
     })
   }
 
+  renderContent() {
+    const { translations, inputsUser, inputsState, categories, current_category_id, content } = this.state
+    switch (content) {
+      case "exercice":
+        return <Exercice translations={translations} inputsUser={inputsUser}
+          inputsState={inputsState} handleNext={this.handleNext} handleCorrection={this.handleCorrection} handleChange={this.handleChange} />
+        break;
+      default:
+        return <Course translations={translations} />
+    }
+  }
+
   render() {
+    let content = this.renderContent()
+    const { categories } = this.state
     return (
       <div>
-        <Header categories={this.state.categories} handleCategory={this.handleCategory} />
-        <div className="container">
-          <div className="text-center mb-4">
-            <h1 className="display-3">Find The Answer</h1>
-          </div>
-          <div>
-            <TranslationList translations={this.state.translations} inputsUser={this.state.inputsUser}
-              inputsState={this.state.inputsState} handleChange={this.handleChange} />
-          </div>
-          <div className="row">
-            <div className="col-lg-6 offset-lg-2">
-              <button className="btn btn-primary col-lg-2 offset-lg-5 mr-1 mb-1" onClick={this.handleCorrection}>Correction</button>
-              <button className="btn btn-primary offset-sm-1 col-lg-2 mb-1 ml-1" onClick={this.handleNext}>Next</button>
-            </div>
-          </div>
-        </div >
+        <Header categories={categories} handleCategory={this.handleCategory} />
+        {content}
       </div >
     );
   }

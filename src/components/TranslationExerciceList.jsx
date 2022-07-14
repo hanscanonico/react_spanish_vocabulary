@@ -1,7 +1,7 @@
 import React from 'react';
 import Translation from './Translation';
 
-class TranslationList extends React.Component {
+class TranslationExerciceList extends React.Component {
 
     render() {
         const translations = [...this.props.translations]
@@ -19,4 +19,4 @@ class TranslationList extends React.Component {
     }
 }
 
-export default TranslationList;
+export default TranslationExerciceList;

@@ -18,13 +18,10 @@ class Translation extends React.Component {
                     {translation.text_to_show}
                 </div>
                 <div className="col-lg-2">
-
                     <input id={translation.id} className={className}
                         value={inputsUser[translation.id]} onChange={this.props.handleChange}></input>
                 </div>
-
                 {divCorrection}
-
             </div >
         )
     }

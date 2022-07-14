@@ -19,9 +19,9 @@ class Header extends React.Component {
                                     Revison
                                 </a>
                                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a className="dropdown-item" href="#" onClick={handleCategory}>All</a></li>
+                                    <li><a className="dropdown-item" href="#" onClick={event => handleCategory(event, -1, "course")}>All</a></li>
                                     {categories.map(function (category, id) {
-                                        return (<li key={category.id}><a className="dropdown-item" href="#" onClick={event => handleCategory(event, category.id)}>{category.name}</a></li>)
+                                        return (<li key={category.id}><a className="dropdown-item" href="#" onClick={event => handleCategory(event, category.id, "course")}>{category.name}</a></li>)
                                     })}
                                 </ul>
                             </li>
@@ -30,9 +30,9 @@ class Header extends React.Component {
                                     Exercices
                                 </a>
                                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a className="dropdown-item" href="#" onClick={handleCategory}>All</a></li>
+                                    <li><a className="dropdown-item" href="#" onClick={event => handleCategory(event, -1, "exercice")}>All</a></li>
                                     {categories.map(function (category, id) {
-                                        return (<li key={category.id}><a className="dropdown-item" href="#" onClick={event => handleCategory(event, category.id)}>{category.name}</a></li>)
+                                        return (<li key={category.id}><a className="dropdown-item" href="#" onClick={event => handleCategory(event, category.id, "exercice")}>{category.name}</a></li>)
                                     })}
                                 </ul>
                             </li>

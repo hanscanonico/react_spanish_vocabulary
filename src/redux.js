@@ -98,7 +98,7 @@ export const loadTranslations = (page, category_id) => (dispatch) => {
     if (page == "exercice") {
         translations_url = "http://localhost:3000/translations/exercice.json";
     }
-    else if (page == "revision") {
+    else if (page == "course") {
         translations_url = "http://localhost:3000/translations.json";
     }
     if (category_id !== -1) {

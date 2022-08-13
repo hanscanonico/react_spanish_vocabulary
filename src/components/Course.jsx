@@ -1,15 +1,18 @@
 import React, { useEffect } from 'react';
 import { loadTranslations } from '../redux';
 import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 const Course = (props) => {
     const translations = useSelector((state) => state.translations.list);
-    const page = useSelector((state) => state.translations.page);
-    const category_id = useSelector((state) => state.translations.category_id);
+    let { category_id } = useParams();
+    if (category_id == undefined) {
+        category_id = -1;
+    }
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(loadTranslations(page, category_id));
-    }, [dispatch]);
+        dispatch(loadTranslations("course", category_id));
+    }, [category_id]);
 
     return (<div className="container">
         <div className="text-center mb-4">
@@ -28,8 +31,6 @@ const Course = (props) => {
         })}
     </div >
     )
-
-
 }
 
 export default Course;

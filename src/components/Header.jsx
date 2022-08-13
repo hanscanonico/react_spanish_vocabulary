@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadCategories, loadTranslations, setCategoryId, setPage } from '../redux';
+import { Link } from "react-router-dom";
+
+
 const Header = (props) => {
 
     const categories = useSelector((state) => state.categories.list);
@@ -20,7 +23,7 @@ const Header = (props) => {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#">Spanish Vocabulary</a>
+                <Link to="/exercices" className="navbar-brand" href="#">Spanish Vocabulary</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -31,9 +34,9 @@ const Header = (props) => {
                                 Revison
                             </a>
                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a className="dropdown-item" href="#" onClick={event => handleCategory(event, -1, "revision")}>All</a></li>
+                                <li><Link to="/courses" className="dropdown-item">All</Link></li>
                                 {categories.map(function (category, id) {
-                                    return (<li key={category.id}><a className="dropdown-item" href="#" onClick={event => handleCategory(event, category.id, "revision")}>{category.name}</a></li>)
+                                    return (<li key={category.id}><Link to={`/courses/${category.id}`} className="dropdown-item" >{category.name}</Link></li>)
                                 })}
                             </ul>
                         </li>
@@ -42,16 +45,16 @@ const Header = (props) => {
                                 Exercices
                             </a>
                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a className="dropdown-item" href="#" onClick={event => handleCategory(event, -1, "exercice")}>All</a></li>
+                                <li><Link to="/exercices" className=" dropdown-item">All</Link></li>
                                 {categories.map(function (category, id) {
-                                    return (<li key={category.id}><a className="dropdown-item" href="#" onClick={event => handleCategory(event, category.id, "exercice")}>{category.name}</a></li>)
+                                    return (<li key={category.id}><Link to={`/exercices/${category.id}`} className="dropdown-item">{category.name}</Link></li>)
                                 })}
                             </ul>
                         </li>
                     </ul>
                 </div>
-            </div>
-        </nav>
+            </div >
+        </nav >
     );
 
 }

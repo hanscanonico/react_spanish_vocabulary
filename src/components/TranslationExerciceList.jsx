@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Translation from './Translation';
 
 import { useSelector, useDispatch } from 'react-redux';

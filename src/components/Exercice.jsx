@@ -1,27 +1,33 @@
 import React, { useEffect } from 'react';
 import TranslationExerciceList from './TranslationExerciceList';
 import { useSelector, useDispatch } from 'react-redux';
-import { loadTranslations, setInputsState } from '../redux';
+import { loadTranslations, setCategoryId, setInputsState } from '../redux';
+import { useParams } from 'react-router-dom';
+
 const Exercice = (props) => {
-
     const translations = useSelector((state) => state.translations.list);
-    const page = useSelector((state) => state.translations.page);
-    const category_id = useSelector((state) => state.translations.category_id);
-    const inputsUser = useSelector((state) => state.translations.inputsUser);
 
+    let { category_id } = useParams();
+    if (category_id == undefined) {
+        category_id = -1;
+    }
+
+    const inputsUser = useSelector((state) => state.translations.inputsUser);
     const dispatch = useDispatch();
+
     useEffect(() => {
-        dispatch(loadTranslations(page, category_id));
-    }, [dispatch]);
+        dispatch(loadTranslations("exercice", category_id));
+    }, [category_id]);
 
     const handleNext = () => {
-        dispatch(loadTranslations(page, category_id));
+        dispatch(loadTranslations("exercice", category_id));
     }
 
     const handleCorrection = () => {
         translations.map(function (translation) {
             dispatch(setInputsState({ value: "is-valid", id: translation.id }));
-            if (inputsUser[translation.id].normalize("NFD").replace(/[\u0300-\u036f]/g, "") !== translation.correction.normalize("NFD").replace(/[\u0300-\u036f]/g, "")) {
+            if (inputsUser[translation.id].normalize("NFD").replace(/[\u0300-\u036f]/g, "") !== translation.correction.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace("’", "'")) {
+
                 dispatch(setInputsState({ value: "is-invalid", id: translation.id }));
             }
         });

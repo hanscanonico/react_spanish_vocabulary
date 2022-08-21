@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+// @ts-ignore 
+import App from './App.tsx';
+// @ts-ignore 
+import reportWebVitals from './reportWebVitals.ts';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route, Link } from "react-router-dom";
-import Exercice from './components/Exercice';
-import Course from './components/Course';
+// @ts-ignore 
+import Exercice from './components/Exercice.tsx';
+// @ts-ignore 
+import Course from './components/Course.tsx';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

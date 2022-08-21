@@ -1,5 +1,6 @@
 import React from 'react';
-import Translation from './Translation';
+// @ts-ignore 
+import Translation from './Translation.tsx';
 
 import { useSelector, useDispatch } from 'react-redux';
 const TranslationExerciceList = (props) => {

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { loadTranslations } from '../redux';
+// @ts-ignore 
+import { loadTranslations } from '../redux.ts';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 

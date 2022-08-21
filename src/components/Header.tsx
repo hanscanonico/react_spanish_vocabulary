@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { loadCategories, loadTranslations, setCategoryId, setPage } from '../redux';
+// @ts-ignore 
+import { loadCategories, loadTranslations, setCategoryId, setPage } from '../redux.ts';
 import { Link } from "react-router-dom";
 
 

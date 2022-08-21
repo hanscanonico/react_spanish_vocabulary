@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setInputsUser } from '../redux';
+// @ts-ignore 
+import { setInputsUser } from '../redux.ts';
 const Translation = (props) => {
     const dispatch = useDispatch();
 
@@ -16,7 +17,7 @@ const Translation = (props) => {
     const { translation } = props
     const isKey = translation.type === "key";
     let className = 'form-control mb-3 ' + inputsState[translation.id];
-    let divCorrection = ""
+    let divCorrection = <div />
     if (inputsState[translation.id] == "is-invalid") {
         divCorrection = <div className="col-lg-2 text-danger" role="alert">{translation.correction}</div>
     }

@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
-import TranslationExerciceList from './TranslationExerciceList';
+// @ts-ignore 
+import TranslationExerciceList from './TranslationExerciceList.tsx';
+// @ts-ignore 
 import { useSelector, useDispatch } from 'react-redux';
-import { loadTranslations, setCategoryId, setInputsState } from '../redux';
+// @ts-ignore 
+import { loadTranslations, setCategoryId, setInputsState } from '../redux.ts';
 import { useParams } from 'react-router-dom';
 
 const Exercice = (props) => {

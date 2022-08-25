@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
 // @ts-ignore 
-import Header from './components/Header.tsx';
+import Header from './features/Category/Header.tsx';
 import { Provider } from 'react-redux';
 // @ts-ignore 
-import store from './redux.ts';
+import { store } from './app/store.ts';
 import { Outlet } from "react-router-dom";
 
 class App extends React.Component {

@@ -1,18 +1,24 @@
-import React, { useEffect } from 'react';
-// @ts-ignore 
-import { loadTranslations } from '../redux.ts';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+// @ts-ignore 
+import { fetchCourse } from './translationAPI.ts';
+
+// @ts-ignore 
+import { useAppSelector, useAppDispatch } from '../../app/hook.ts';
+// @ts-ignore 
+import { selectTranslations, TranslationsState } from './translationSlice.ts';
+// @ts-ignore 
+import { fetchCourseAsync } from './translationSlice.ts';
 
 const Course = (props) => {
-    const translations = useSelector((state) => state.translations.list);
+    const translations: TranslationsState = useSelector(selectTranslations);
+    const [translationsData, setTranslationsData] = useState(translations);
     let { category_id } = useParams();
-    if (category_id == undefined) {
-        category_id = -1;
-    }
+
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(loadTranslations("course", category_id));
+        dispatch(fetchCourseAsync(category_id));
     }, [category_id]);
 
     return (<div className="container">

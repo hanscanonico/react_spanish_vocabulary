@@ -1,30 +1,32 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 // @ts-ignore 
-import { loadCategories, loadTranslations, setCategoryId, setPage } from '../redux.ts';
 import { Link } from "react-router-dom";
-
-
+// @ts-ignore 
+import { useAppSelector, useAppDispatch } from '../../app/hook.ts';
+// @ts-ignore 
+import { fetchCategoriesAsync, selectCategories } from './categorySlice.ts';
 const Header = (props) => {
 
-    const categories = useSelector((state) => state.categories.list);
-
+    const categories = useAppSelector(selectCategories);
+    const [data, setData] = useState(categories);
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(loadCategories());
-    }, [dispatch]);
+        dispatch(fetchCategoriesAsync());
+
+    }, []);
 
     const handleCategory = (event, category_id, page) => {
         event.preventDefault()
-        dispatch(loadTranslations(page, category_id));
-        dispatch(setCategoryId(category_id));
-        dispatch(setPage(page));
+        setData(fetchCategoriesAsync());
+
     }
+
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
-                <Link to="/exercices" className="navbar-brand" href="#">Spanish Vocabulary</Link>
+                <Link to="/exercices" className="navbar-brand">Spanish Vocabulary</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>

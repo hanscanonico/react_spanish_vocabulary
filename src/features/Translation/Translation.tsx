@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // @ts-ignore 
-import { setInputsUser } from '../redux.ts';
+import { useAppSelector, useAppDispatch } from '../../app/hook.ts';
+// @ts-ignore 
+import { selectInputsState, selectInputsUser, setInputsUser } from './translationSlice.ts';
 const Translation = (props) => {
     const dispatch = useDispatch();
 
-    const inputsState = useSelector((state) => state.translations.inputsState);
-    const inputsUser = useSelector((state) => state.translations.inputsUser);
+    const inputsState = useAppSelector(selectInputsState);
+    const inputsUser = useAppSelector(selectInputsUser);
 
     const handleChange = (event) => {
         event.preventDefault();
@@ -31,7 +33,7 @@ const Translation = (props) => {
             </div>
             <div className="col-lg-2">
                 <input id={translation.id} className={className}
-                    value={inputsUser[translation.id]} onChange={event => handleChange(event)}></input>
+                    value={inputsUser[translation.id] || ""} onChange={event => handleChange(event)}></input>
             </div>
             {divCorrection}
         </div >

@@ -7,11 +7,11 @@ import App from './App.tsx';
 import reportWebVitals from './reportWebVitals.ts';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter } from "react-router-dom";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 // @ts-ignore 
-import Exercice from './components/Exercice.tsx';
+import Exercice from './features/Translation/Exercice.tsx';
 // @ts-ignore 
-import Course from './components/Course.tsx';
+import Course from './features/Translation/Course.tsx';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

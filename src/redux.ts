@@ -1,6 +1,4 @@
 import { configureStore, createSlice, getDefaultMiddleware } from "@reduxjs/toolkit"
-import { apiCallBegan } from "./store/api";
-import api from "./store/middleware/api";
 
 
 const translationSlice = createSlice({
@@ -15,36 +13,18 @@ const translationSlice = createSlice({
         page: "exercice"
     },
     reducers: {
-        translationsRequested: (translations, action) => {
-            translations.loading = true;
-        },
-        translationsReceived: (translations, action) => {
-            translations.list = action.payload;
-            let inputsUser = []
-            let inputsState = []
-            translations.list.map(function (translation, idx) {
-                inputsUser[translation.id] = ""
-                inputsState[translation.id] = ""
-            });
-            translations.loading = false;
-            translations.inputsUser = inputsUser;
-            translations.inputsState = inputsState;
-        },
-        translationsRequestFailed: (translations, action) => {
-            translations.loading = false;
-        },
         setCategoryId: (translations, action) => {
             translations.category_id = action.payload;
         },
         setPage: (translations, action) => {
             translations.page = action.payload;
         },
-        setInputsUser: (translations, action) => {
+        setInputsUser: (translations: any, action) => {
             let value = action.payload.value;
             let id = action.payload.id;
             translations.inputsUser[id] = value;
         },
-        setInputsState: (translations, action) => {
+        setInputsState: (translations: any, action) => {
             let value = action.payload.value;
             let id = action.payload.id;
             translations.inputsState[id] = value;
@@ -66,7 +46,6 @@ const categorySlice = createSlice({
 
         categoriesReceived: (categories, action) => {
             categories.list = action.payload;
-
             categories.loading = false;
         },
 

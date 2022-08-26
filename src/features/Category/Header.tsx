@@ -9,19 +9,10 @@ import { fetchCategoriesAsync, selectCategories } from './categorySlice.ts';
 const Header = (props) => {
 
     const categories = useAppSelector(selectCategories);
-    const [data, setData] = useState(categories);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchCategoriesAsync());
-
     }, []);
-
-    const handleCategory = (event, category_id, page) => {
-        event.preventDefault()
-        setData(fetchCategoriesAsync());
-
-    }
-
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">

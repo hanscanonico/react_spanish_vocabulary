@@ -1,6 +1,6 @@
 import { TranslationState } from "./translationSlice";
 
-const API_URL = "http://localhost:3000";
+const API_URL = "http://localhost:3005";
 
 export function fetchCourse(category_id: number) {
     let url: string = `${API_URL}/translations.json`;

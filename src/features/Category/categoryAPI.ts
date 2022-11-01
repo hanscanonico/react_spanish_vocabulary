@@ -1,6 +1,6 @@
 import { CategoryState } from "./categorySlice";
 
-const API_URL = "http://localhost:3000";
+const API_URL = "http://localhost:3005";
 
 export function fetchCategories() {
     return fetch(`${API_URL}/categories.json`, {
